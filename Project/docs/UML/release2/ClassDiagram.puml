@@ -1,0 +1,106 @@
+@startuml
+
+title MovieRater Class Diagram
+
+/' - private
+    # protected
+    ~ package level access
+    + public
+ '/
+
+package "movierater.core" {
+    namespace movierater.core {
+        class movierater.core.Film {
+            - title : String
+            - year : int
+            - ratin : int
+            - comments : String
+            - seen : boolean
+
+            + Film()
+            + Film(String title, int year, int rating, String comment, boolean seen)
+            + getTitle() : String
+            + setTitle(String title) : void
+            + getYear() : int
+            + setYear(int year) : void
+            + getRating() : int
+            + setRating(int rating) : void
+            + getComment() : String
+            + setComment(String comment) : void
+            + getSeen() : boolean
+            + setSeen(boolean seen) : void
+        }
+    }
+    namespace movierater.core {
+        class movierater.core.FilmList {
+            - filmList : List<Film>
+            - userName : String
+            
+            + FilmList()
+            + FilmList(String userName)
+            + setUsername(String userName) : void
+            + getUserName() : String
+            + getFilmList() : List<Film>
+            + addFilm(Film newFilm) : void
+            + removeFilm(Film film) : void
+            + iterator() : Iterator<Film>
+        }
+    }
+}
+
+
+package "movierater.fxui" {
+    namespace movierater.fxui {
+        class movierater.fxui.FilmApp {
+            {static} + main()
+            + start()
+        }
+    }
+    namespace movierater.fxui {
+        class movierater.fxui.LoginPageController {
+            - userNameInput : TextField
+            - startPageInfoTextArea : TextArea
+            - loginButton : Button
+
+            - initialize() : void
+            - handleLoginAction() : void
+            - openMainPage() : void
+            - isFieldsEmpty() : boolean
+        }
+    }
+    namespace movierater.fxui {
+        class movierater.fxui.MainPageController {
+            - filmList : List<Film> 
+            - userName : String
+            - tableViewFilmList : ObservableList<Film> 
+            - filmPersistence : FilmPersistence 
+
+            + handleAddFilmAction() : void
+            + handleDeleteFilmAction() : void
+            + handleLogOutAction() : void
+            + setUserName(String userName) : void
+            + login() : void
+            + getUserName() : String
+            - readFile(String userName) : void
+            - writeToFile() : void
+            - checkIfFileExists(String userName) : boolean
+            - isFieldsEmpty() : boolean
+            - setUpFilmTableView() : void
+            - updateFilmTableView() : void
+            - clearTextField() : void
+            - getPathString(String userName) : String
+            - editCell() : void
+            - showErrorAlert(String message) : void
+            - showInfoAlert(String message) : void
+        }
+    }
+
+    movierater.fxui.FilmApp -up-|> javafx.application.Application
+    movierater.fxui.LoginPageController *-- movierater.fxui.MainPageController : MainPageController
+    movierater.fxui.MainPageController o-left-- movierater.core.FilmList : FilmList
+    movierater.fxui.MainPageController o-left-- movierater.core.Film : Film
+    movierater.core.FilmList o-- movierater.core.Film : Film
+
+}
+
+@enduml

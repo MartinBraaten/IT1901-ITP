@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane prefHeight="500.0" prefWidth="900.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="movierater.fxui.MainPageController">
+  <left>
+    <AnchorPane prefHeight="400.0" prefWidth="150.0" style="-fx-background-color: #575757;"
+                BorderPane.alignment="CENTER_LEFT">
+      <Text fill="#ff2929" layoutX="51.0" layoutY="31.0" text="MovieRater">
+        <font>
+          <Font name="Arial Bold" size="16.0"/>
+        </font>
+      </Text>
+      <ImageView fitHeight="33.0" fitWidth="30.0" layoutX="13.0" layoutY="9.0">
+        <Image url="@img/filmReel.png"/>
+      </ImageView>
+      <TextField fx:id="inputFilmList" layoutX="4.0" layoutY="105.0" prefHeight="25.0" prefWidth="100.0"
+                 promptText="New movie list"/>
+      <Button fx:id="addFilmListButton" layoutX="104.0" layoutY="104.0" mnemonicParsing="false"
+              onAction="#handleAddFilmListAction" text="Add"/>
+      <ComboBox fx:id="dropDownList" layoutX="4.0" layoutY="163.0" onAction="#handleChangeListAction" prefHeight="25.0"
+                prefWidth="140.0"/>
+      <Button fx:id="deleteFilmListButton" layoutX="4.0" layoutY="200.0" mnemonicParsing="false"
+              onAction="#handleDeleteFilmListAction" prefWidth="100.0" text="Delete Filmlist"/>
+      <Text layoutX="6.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MovieLists:">
+        <font>
+          <Font name="Arial" size="14.0"/>
+        </font>
+      </Text>
+
+      <Text layoutX="6.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new MovieList:">
+        <font>
+          <Font name="Arial" size="14.0"/>
+        </font>
+      </Text>
+      <Button fx:id="logOutButton" layoutX="22.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleLogOutAction"
+              text="Log out">
+        <graphic>
+          <ImageView fitHeight="16.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@img/home.png"/>
+          </ImageView>
+        </graphic>
+      </Button>
+    </AnchorPane>
+  </left>
+  <bottom>
+    <AnchorPane prefHeight="90.0" prefWidth="750.0" style="-fx-background-color: #575757;"
+                BorderPane.alignment="BOTTOM_RIGHT">
+      <TextField fx:id="addTitleText" layoutX="300.0" layoutY="51.0" prefHeight="25.0" prefWidth="100"
+                 promptText="Add new movie"/>
+      <TextField fx:id="addYearText" layoutX="410.0" layoutY="51.0" prefHeight="25.0" prefWidth="50.0" promptText="Year"/>
+      <TextField fx:id="addRatingText" layoutX="470.0" layoutY="51.0" prefHeight="25.0" prefWidth="95.0"
+                 promptText="Rating (0-10)"/>
+      <TextField fx:id="addCommentText" layoutX="575.0" layoutY="51.0" prefHeight="25.0" prefWidth="95.0"
+                 promptText="Comment"/>
+      <CheckBox fx:id="seenFilmCheckBox" cache="true" layoutX="680.0" layoutY="54.0" mnemonicParsing="false" text="Seen"
+                textFill="#bcbcbc"/>
+      <Button fx:id="addFilmButton" layoutX="740.0" layoutY="51.0" mnemonicParsing="false"
+              onAction="#handleAddFilmAction" text="Add Movie"/>
+      <Button fx:id="deleteFilmButton" layoutX="825.0" layoutY="51.0" mnemonicParsing="false"
+              onAction="#handleDeleteFilmAction" prefHeight="25.0" prefWidth="86.0" text="Delete Movie"/>
+      <Text layoutX="188.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new movie:">
+        <font>
+          <Font name="Arial" size="14.0"/>
+        </font>
+      </Text>
+      <Button fx:id="deleteUserButton" layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
+              onAction="#handleDeleteUserAction" text="Delete User" textFill="WHITE">
+        <graphic>
+          <ImageView fitHeight="16.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@img/delete.png"/>
+          </ImageView>
+        </graphic>
+      </Button>
+      <Label fx:id="userNameLabel" layoutX="74.0" layoutY="3.0" text="User" textFill="WHITE">
+        <font>
+          <Font name="Arial Black" size="14.0"/>
+        </font>
+      </Label>
+      <Text layoutX="29.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User:">
+        <font>
+          <Font name="Arial Black" size="13.0"/>
+        </font>
+      </Text>
+    </AnchorPane>
+  </bottom>
+  <right>
+    <AnchorPane prefHeight="410.0" prefWidth="800.0" BorderPane.alignment="CENTER_RIGHT">
+      <TableView fx:id="filmTableView" prefHeight="410.0" prefWidth="800.0">
+        <columns>
+          <TableColumn fx:id="title" minWidth="300.0" prefWidth="300.0" style="text-align: left;" text="Title"/>
+          <TableColumn fx:id="year" maxWidth="70.0" prefWidth="70.0" text="Year"/>
+          <TableColumn fx:id="rating" maxWidth="70.0" prefWidth="70.0" text="Rating"/>
+          <TableColumn fx:id="comment" minWidth="300.0" prefWidth="300.0" text="Comment"/>
+          <TableColumn fx:id="seen" maxWidth="60.0" prefWidth="60.0" text="Seen"/>
+        </columns>
+      </TableView>
+    </AnchorPane>
+  </right>
+</BorderPane>

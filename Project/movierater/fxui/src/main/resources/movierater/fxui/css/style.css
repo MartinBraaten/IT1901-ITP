@@ -1,0 +1,177 @@
+#loginButton {
+  -fx-background-color:
+  #000000,
+  linear-gradient(#155eab, #215ed0),
+  linear-gradient(#155eab, #215ed0),
+  linear-gradient(#155eab, #215ed0);
+  background-color:
+  #000000,
+  linear-gradient(#155eab, #103476),
+  linear-gradient(#155eab, #103476),
+  linear-gradient(#155eab, #103476);
+  -fx-background-insets: 0, 1, 2, 3;
+  -fx-background-radius: 3, 2, 2, 2;
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+  font-size: 14 px;
+}
+
+#loginButton:hover,
+#loginButton:focused {
+  -fx-background-color:
+  #000000,
+  linear-gradient(#155eab90, #215ed090),
+  linear-gradient(#155eab30, #215ed030),
+  linear-gradient(#155eab30, #215ed030);
+  background-color:
+  #000000,
+  linear-gradient(#155eab, #103476),
+  linear-gradient(#155eab, #103476),
+  linear-gradient(#155eab, #103476);
+}
+
+.table-view .column-header {
+  -fx-font-size: 12;
+  font-size:12;
+
+}
+
+.button {
+  -fx-background-insets: 0, 1, 2, 3;
+  -fx-background-radius: 3, 2, 2, 2;
+  -fx-padding: 6 10 6 10;
+  padding: 6 10 6 10;
+  -fx-text-fill: black;
+  -fx-font-size: 12px;
+  font-size: 12 px;
+}
+
+
+#deleteUserButton {
+  -fx-background-color:
+    #000000,
+    linear-gradient(#ff1919, #8a1010),
+    linear-gradient(#ff1919, #8a1010),
+    linear-gradient(#ff1919, #8a1010);
+    background-color: 
+    #000000,
+    linear-gradient(#ff1919, #8a1010),
+    linear-gradient(#ff1919, #8a1010),
+    linear-gradient(#ff1919, #8a1010);
+  -fx-background-insets: 0, 1, 2, 3;
+  -fx-background-radius: 3, 2, 2, 2;
+  -fx-padding: 10 20 10 20;
+  padding: 10 20 10 20;
+  -fx-text-fill: white;
+  -fx-font-size: 12px;
+  font-size: 12 px;
+}
+
+
+#deleteFilmButton, #deleteFilmListButton{
+  -fx-background-color:
+    #000000,
+    linear-gradient(#ea7e7e, #8f2f2f),
+    linear-gradient(#ea7e7e, #8f2f2f),
+    linear-gradient(#ea7e7e, #8f2f2f);
+    background-color:
+    #000000,
+    linear-gradient(#ea7e7e, #8f2f2f),
+    linear-gradient(#ea7e7e, #8f2f2f),
+    linear-gradient(#ea7e7e, #8f2f2f);
+  -fx-text-fill: white;
+}
+
+#addFilmButton {
+  -fx-background-color:
+    #000000,
+    linear-gradient(#3bab15, #297610),
+    linear-gradient(#3bab15, #297610),
+    linear-gradient(#3bab15, #297610);
+    background-color:
+    #000000,
+    linear-gradient(#3bab15, #297610),
+    linear-gradient(#3bab15, #297610),
+    linear-gradient(#3bab15, #297610);
+  -fx-text-fill: white;
+
+}
+
+#deleteFilmListButton {
+  -fx-background-color:
+    #000000,
+    linear-gradient(#ea7e7e, #8f2f2f),
+    linear-gradient(#ea7e7e, #8f2f2f),
+    linear-gradient(#ea7e7e, #8f2f2f);
+    background-color:
+    #000000,
+    linear-gradient(#ea7e7e, #8f2f2f),
+    linear-gradient(#ea7e7e, #8f2f2f),
+    linear-gradient(#ea7e7e, #8f2f2f);
+}
+
+#addFilmListButton {
+  -fx-background-color:
+  #000000,
+  linear-gradient(#155eab, #103476),
+  linear-gradient(#155eab, #103476),
+  linear-gradient(#155eab, #103476);
+  background-color:
+  #000000,
+  linear-gradient(#155eab, #103476),
+  linear-gradient(#155eab, #103476),
+  linear-gradient(#155eab, #103476);
+-fx-text-fill: white;
+}
+
+#deleteUserButton:hover,
+#deleteFilmButton:hover,
+#deleteFilmListButton:hover,
+#deleteUserButton:focused,
+#deleteFilmButton:focused,
+#deleteFilmListButton:focused
+ {
+  -fx-background-color:
+    #000000,
+    linear-gradient(#ea7e7e80, #8f2f2f80),
+    linear-gradient(#ea7e7e20, #8f2f2f20),
+    linear-gradient(#ea7e7e20, #8f2f2f20);
+    background-color:
+    #000000,
+    linear-gradient(#ea7e7e80, #8f2f2f80),
+    linear-gradient(#ea7e7e20, #8f2f2f20),
+    linear-gradient(#ea7e7e20, #8f2f2f20);
+}
+
+#addFilmButton:hover,
+#addFilmButton:focused {
+  -fx-background-color:
+    #000000,
+    linear-gradient(#3bab1580, #29761080),
+    linear-gradient(#3bab1520, #29761020),
+    linear-gradient(#3bab1520, #29761020);
+    background-color:
+    #000000,
+    linear-gradient(#3bab1580, #29761080),
+    linear-gradient(#3bab1520, #29761020),
+    linear-gradient(#3bab1520, #29761020);
+  -fx-text-fill: white;
+
+}
+
+#addFilmListButton:hover,
+#addFilmListButton:focused
+{
+  -fx-background-color:
+  #000000,
+  linear-gradient(#155eab80, #10347680),
+  linear-gradient(#155eab20, #10347620),
+  linear-gradient(#155eab20, #10347620);
+  background-color:
+  #000000,
+  linear-gradient(#155eab80, #10347680),
+  linear-gradient(#155eab20, #10347620),
+  linear-gradient(#155eab20, #10347620);
+-fx-text-fill: white;
+
+}

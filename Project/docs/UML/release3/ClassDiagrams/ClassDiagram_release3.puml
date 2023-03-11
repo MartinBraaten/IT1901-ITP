@@ -1,0 +1,234 @@
+@startuml MovieRater Class Diagram
+
+/' Copy paste fra forrige innlevering '/
+title MovieRater Class Diagram
+
+/' - private
+    # protected
+    ~ package level access
+    + public
+ '/
+
+package "movierater.core" {
+    namespace movierater.core {
+        class movierater.core.Film {
+            - title : String
+            - year : int
+            - rating : int
+            - comments : String
+            - seen : boolean
+
+            + Film(String title, int year, int rating, String comment, boolean seen)
+            + Film()
+            + getTitle() : String
+            + setTitle(String title) : void
+            + getYear() : int
+            + setYear(int year) : void
+            + getRating() : int
+            + setRating(int rating) : void
+            + getComment() : String
+            + setComment(String comment) : void
+            + isSeen() : boolean
+            + setSeen(boolean seen) : void
+        }
+    }
+
+    namespace movierater.core {
+        class movierater.core.FilmList {
+            - filmList : ArrayList<Film>
+            
+            + FilmList()
+            + getFilmList() : ArrayList<Film>
+            + addFilm(Film newFilm) : void
+            + removeFilm(Film film) : void
+            + iterator() : Iterator<Film>
+        }
+    }
+
+    namespace movierater.core{
+        class movierater.core.User{
+            - userName : String
+            - filmListMap : HashMap<String, FilmList>
+
+            + User(String userName)
+            + User()
+            + getUserName() : String
+            + setUserName(String userName) : void
+            + addFilmList(String key, FilmList filmList) : void
+            + addFilmToFilmList(Film film, String filmListKey) : void
+            + getFilmList(String key) : FilmList
+            + getFilmListMap() : HashMap<String, FilmList>
+            + deleteFilmList(String filmListKey) : void
+        }
+    }
+}
+
+package "movierater.json" {
+        namespace movierater.json {
+            class movierater.json.UserPersistence {
+                - {static}mapper : ObjectMapper
+
+                + UserPersistence()
+                + readUser(Reader reader) : User
+                + writeUser(Writer writer, User user) : void
+            }
+        }
+    }
+
+package "movierater.fxui" {
+    namespace movierater.fxui{
+        interface movierater.fxui.DataAccess{
+            + createUser(String userName) : User
+            + getUserFromFile(String userName) : User
+            + postUserToFile(User user) : boolean
+            + deleteUser(User user) : void
+        }
+    }
+
+    namespace movierater.fxui {
+        class movierater.fxui.FilmApp {
+            {static} + main()
+            + start()
+        }
+    }
+
+    namespace movierater.fxui{
+        class movierater.fxui.LocalAccess{
+            - userPersistence : UserPersistence
+            - path : String
+
+            + localAccess(String path)
+            + getUserFromFile(String userName) : User
+            + postUserToFile(User user) : void
+            + deleteUser(User user) : void
+        }
+    }
+
+    namespace movierater.fxui {
+        class movierater.fxui.LoginPageController {
+            ~ userNameInput : TextField
+            ~ loginButton : Button
+            ~ mainPageController : MainPageController
+            ~ accessDropDown : ComboBox<String>
+            - dataAccess : DataAccess
+
+            ~ initialize() : void
+            ~ setComboBox() : void
+            ~ handleLoginAction() : void
+            ~ setDataAccess(DataAccess dataAccess) : void
+            - openMainPage() : void
+            - disableButtonIfEmpty() : void
+        }
+    }
+
+    namespace movierater.fxui {
+        class movierater.fxui.MainPageController {
+            ~ filmTableView : TableView<Film>;
+            ~ title : TableColumn<Film, String>
+            ~ comment : TableColumn<Film, String>
+            ~ rating : TableColumn<Film, Integer>
+            ~ year : TableColumn<Film, Integer>
+            ~ seen : TableColumn<Film, Boolean>
+            ~ addTitleText : TextField
+            ~ addYearText : TextField
+            ~ addRatingText : TextField
+            ~ addCommentText : TextField
+            ~ inputFilmList : TextField
+            ~ userNameLabel : Label
+            ~ seenFilmCheckBox : CheckBox
+            ~ dropDownList : ComboBox<String>
+            ~ addFilmButton : Button
+            ~ deleteFilmButton : Button
+            ~ logOutButton : Button
+            ~ addFilmListButton : Button
+            ~ deleteFilmListButton : Button
+            ~ deleteUserButton : Button
+            - user : User
+            - tableViewFilmList : ObservableList<Film>
+            - dataAccess : DataAccess
+
+            ~ initialize() : void
+            ~ setUp(String userName) : void
+            ~ handleChangeListAction() : void
+            ~ handleAddFilmListAction() : void
+            ~ handleDeleteFilmListAction() : void
+            ~ handleAddFilmAction() : void
+            ~ handleDeleteFilmAction() : void
+            ~ handleDeleteUserAction() : void
+            ~ handleLogOutAction() : void
+            ~ updateFilmTableView(String filmListKey) : void
+            ~ setDataAccess(DataAccess dataAccess) : void
+            ~ setUserName(String userName) : void
+            ~ setUser(User user) : void
+            ~ getUserName() : String
+            ~ showErrorAlert(String message) : void
+            ~ showInfoAlert(String message) : void
+            - disableButtons() : void
+            - editCell() : void
+            - updateDropDownList(String newSelection) : void
+            - clearTextField() : void
+            - setUpFilmTableView() : void
+        }
+    }
+
+    namespace movierater.fxui{
+        class movierater.fxui.RemoteAccess{
+            - endpointBaseUri : URI
+            - objectMapper : ObjectMapper
+
+            + RemoteAccess (URI endpointBaseUri)
+            + getUserFromFile(String userName) : User
+            + postUserToFile(User user) : void
+            + deleteUser(User user) : void
+        }
+    }
+}
+
+package "movierater.restserver"{
+    namespace movierater.restserver{
+        class movierater.restserver.RestServerApplication{
+            {static} + main()
+        }
+    }
+
+    namespace movierater.restserver{
+        class movierater.restserver.RestserverController{
+            - restserverService : RestserverService
+
+            + getUser(String user) : User
+            + postUser(User userClass, String user) : boolean
+            + deleteUser(String user) : boolean
+        }
+    }
+
+    namespace movierater.restserver{
+        class movierater.restserver.RestserverService{
+            - userPersistence : UserPersistence
+            - {static} pathString : String
+
+            + getUser(String userName) : User
+            + postUser(User user, String userName) : boolean
+            + deleteUser(String userName) : Boolean
+        }
+    }
+}
+
+movierater.json.UserPersistence o-- movierater.core.User : user
+movierater.core.User o- movierater.core.FilmList : filmListMap
+movierater.core.FilmList o- movierater.core.Film : Film
+movierater.fxui.DataAccess o-- movierater.core.User : User
+movierater.fxui.FilmApp -up-|> javafx.application.Application
+movierater.fxui.LoginPageController *-right- movierater.fxui.MainPageController : MainPageController
+movierater.fxui.LoginPageController o-- movierater.fxui.DataAccess : dataAccess
+movierater.fxui.MainPageController o-up-- movierater.fxui.DataAccess : dataAccess
+movierater.fxui.MainPageController *-- movierater.core.User : user
+movierater.fxui.MainPageController *-- movierater.core.FilmList : FilmList
+movierater.fxui.MainPageController o-- movierater.core.Film : Film
+movierater.fxui.LocalAccess <|.. movierater.fxui.DataAccess : DataAccess
+movierater.fxui.RemoteAccess <|.. movierater.fxui.DataAccess : DataAccess
+movierater.fxui.DataAccess o-down-- movierater.json.UserPersistence : UserPersistence
+movierater.restserver.RestserverController o-left movierater.restserver.RestserverService : RestserverService
+movierater.restserver.RestserverService o-down-- movierater.json.UserPersistence : UserPersistence
+
+
+@enduml

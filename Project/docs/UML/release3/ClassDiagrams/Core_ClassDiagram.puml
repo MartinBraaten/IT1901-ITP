@@ -1,0 +1,82 @@
+@startuml MovieRater Core Class Diagram
+
+/' Copy paste fra forrige innlevering '/
+title MovieRater Core Class Diagram
+
+/' - private
+    # protected
+    ~ package level access
+    + public
+ '/
+
+package "movierater.core" {
+    namespace movierater.core {
+        class movierater.core.Film {
+            - title : String
+            - year : int
+            - rating : int
+            - comments : String
+            - seen : boolean
+
+            + Film(String title, int year, int rating, String comment, boolean seen)
+            + Film()
+            + getTitle() : String
+            + setTitle(String title) : void
+            + getYear() : int
+            + setYear(int year) : void
+            + getRating() : int
+            + setRating(int rating) : void
+            + getComment() : String
+            + setComment(String comment) : void
+            + isSeen() : boolean
+            + setSeen(boolean seen) : void
+        }
+    }
+
+    namespace movierater.core {
+        class movierater.core.FilmList {
+            - filmList : ArrayList<Film>
+
+            + FilmList()
+            + getFilmList() : ArrayList<Film>
+            + addFilm(Film newFilm) : void
+            + removeFilm(Film film) : void
+            + iterator() : Iterator<Film>
+        }
+    }
+
+    namespace movierater.core{
+        class movierater.core.User{
+            - userName : String
+            - filmListMap : HashMap<String, FilmList>
+
+            + User(String userName)
+            + User()
+            + getUserName() : String
+            + setUserName(String userName) : void
+            + addFilmList(String key, FilmList filmList) : void
+            + addFilmToFilmList(Film film, String filmListKey) : void
+            + getFilmList(String key) : FilmList
+            + getFilmListMap() : HashMap<String, FilmList>
+            + deleteFilmList(String filmListKey) : void
+        }
+    }
+}
+
+package "movierater.json" {
+    namespace movierater.json {
+        class movierater.json.UserPersistence {
+                - {static}mapper : ObjectMapper
+
+                + UserPersistence()
+                + readUser(Reader reader) : User
+                + writeUser(Writer writer, User user) : void
+        }
+    }
+}
+
+movierater.json.UserPersistence o-- movierater.core.User : user
+movierater.core.User o- movierater.core.FilmList : filmListMap
+movierater.core.FilmList o- movierater.core.Film : Film
+
+@enduml

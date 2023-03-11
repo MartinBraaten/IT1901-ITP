@@ -1,0 +1,37 @@
+@startuml MovieRater Package Diagram
+
+/' Copy paste fra forrige innlevering '/
+
+title MovieRater Package Diagram
+
+package "core" {
+    component movierater.core
+    component movierater.json
+}
+
+package "restserver" {
+    component movierater.restserver
+}
+
+package "fxui" {
+    component movierater.fxui
+}
+
+component "jackson" {
+}
+
+component "javafx" {
+}
+
+component "Springboot" {
+}
+
+movierater.fxui ..> javafx
+movierater.fxui ..> movierater.core
+movierater.fxui ..> movierater.json
+movierater.json ..> jackson
+movierater.restserver ..> Springboot
+movierater.restserver ..> movierater.json
+movierater.restserver ..> movierater.core
+
+@enduml

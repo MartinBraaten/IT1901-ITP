@@ -1,0 +1,128 @@
+@startuml MovieRater FXUI Class Diagram
+
+/' Copy paste fra classDiagram '/
+title MovieRater FXUI Class Diagram
+
+/' - private
+    # protected
+    ~ package level access
+    + public
+ '/
+
+package "movierater.fxui" {
+    namespace movierater.fxui{
+        interface movierater.fxui.DataAccess{
+            + createUser(String userName) : User
+            + getUserFromFile(String userName) : User
+            + postUserToFile(User user) : boolean
+            + deleteUser(User user) : void
+        }
+    }
+
+    namespace movierater.fxui {
+        class movierater.fxui.FilmApp {
+            {static} + main()
+            + start()
+        }
+    }
+
+    namespace movierater.fxui{
+        class movierater.fxui.LocalAccess{
+            - userPersistence : UserPersistence
+            - path : String
+
+            + localAccess(String path)
+            + getUserFromFile(String userName) : User
+            + postUserToFile(User user) : void
+            + deleteUser(User user) : void
+        }
+    }
+
+    namespace movierater.fxui {
+        class movierater.fxui.LoginPageController {
+            ~ userNameInput : TextField
+            ~ loginButton : Button
+            ~ mainPageController : MainPageController
+            ~ accessDropDown : ComboBox<String>
+            - dataAccess : DataAccess
+
+            ~ initialize() : void
+            ~ setComboBox() : void
+            ~ handleLoginAction() : void
+            ~ setDataAccess(DataAccess dataAccess) : void
+            - openMainPage() : void
+            - disableButtonIfEmpty() : void
+        }
+    }
+
+    namespace movierater.fxui {
+        class movierater.fxui.MainPageController {
+            ~ filmTableView : TableView<Film>;
+            ~ title : TableColumn<Film, String>
+            ~ comment : TableColumn<Film, String>
+            ~ rating : TableColumn<Film, Integer>
+            ~ year : TableColumn<Film, Integer>
+            ~ seen : TableColumn<Film, Boolean>
+            ~ addTitleText : TextField
+            ~ addYearText : TextField
+            ~ addRatingText : TextField
+            ~ addCommentText : TextField
+            ~ inputFilmList : TextField
+            ~ userNameLabel : Label
+            ~ seenFilmCheckBox : CheckBox
+            ~ dropDownList : ComboBox<String>
+            ~ addFilmButton : Button
+            ~ deleteFilmButton : Button
+            ~ logOutButton : Button
+            ~ addFilmListButton : Button
+            ~ deleteFilmListButton : Button
+            ~ deleteUserButton : Button
+            - user : User
+            - tableViewFilmList : ObservableList<Film>
+            - dataAccess : DataAccess
+
+            ~ initialize() : void
+            ~ setUp(String userName) : void
+            ~ handleChangeListAction() : void
+            ~ handleAddFilmListAction() : void
+            ~ handleDeleteFilmListAction() : void
+            ~ handleAddFilmAction() : void
+            ~ handleDeleteFilmAction() : void
+            ~ handleDeleteUserAction() : void
+            ~ handleLogOutAction() : void
+            ~ updateFilmTableView(String filmListKey) : void
+            ~ setDataAccess(DataAccess dataAccess) : void
+            ~ setUserName(String userName) : void
+            ~ setUser(User user) : void
+            ~ getUserName() : String
+            ~ showErrorAlert(String message) : void
+            ~ showInfoAlert(String message) : void
+            - disableButtons() : void
+            - editCell() : void
+            - updateDropDownList(String newSelection) : void
+            - clearTextField() : void
+            - setUpFilmTableView() : void
+        }
+    }
+
+    namespace movierater.fxui{
+        class movierater.fxui.RemoteAccess{
+            - endpointBaseUri : URI
+            - objectMapper : ObjectMapper
+
+            + RemoteAccess (URI endpointBaseUri)
+            + getUserFromFile(String userName) : User
+            + postUserToFile(User user) : void
+            + deleteUser(User user) : void
+        }
+    }
+}
+
+movierater.fxui.FilmApp -up-|> javafx.application.Application
+movierater.fxui.LoginPageController *-right- movierater.fxui.MainPageController : MainPageController
+movierater.fxui.LoginPageController o-- movierater.fxui.DataAccess : dataAccess
+movierater.fxui.MainPageController o-up-- movierater.fxui.DataAccess : dataAccess
+movierater.fxui.LocalAccess <|.. movierater.fxui.DataAccess : DataAccess
+movierater.fxui.RemoteAccess <|.. movierater.fxui.DataAccess : DataAccess
+
+@enduml

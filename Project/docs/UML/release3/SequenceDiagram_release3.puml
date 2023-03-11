@@ -1,0 +1,102 @@
+@startuml Movierater Sequence Diagram
+
+title Movierater Sequence Diagram
+
+skinparam Sequence {
+ BoxBorderColor #d1d1d1
+}
+
+autonumber
+Actor user
+box "Fxui" #f0ede6
+user -> GUI : "Adds new movie"
+
+GUI -> MainPageController : addMovieButton is pushed
+
+activate MainPageController
+
+end box
+box "Core" #ffffff
+
+MainPageController -> User : handleAddFilmAction()
+activate MainPageController
+activate User
+
+
+
+User -> Film : <<create>>()
+activate Film
+
+Film -> User
+deactivate Film
+
+User -> User : addFilmToFilmList()
+activate User
+
+User -> FilmList : addFilm()
+activate FilmList
+FilmList -> User
+deactivate FilmList
+User -> MainPageController
+deactivate User
+deactivate User
+
+
+end box
+box "Fxui" #f0ede6
+
+MainPageController -> DataAccess : postFilmList()
+activate DataAccess
+
+
+end box
+box "RestServer" #ffffff
+
+DataAccess -> RestserverController : HTTP POST/movierater/user
+activate RestserverController
+activate DataAccess
+
+RestserverController -> RestserverService : postUser()
+activate RestserverService
+
+end box
+box "Core" #ffffff
+
+RestserverService -> UserPersistence : writeUser()
+activate UserPersistence
+UserPersistence -> RestserverService
+deactivate UserPersistence
+
+end box
+box "RestServer" #ffffff
+
+RestserverService -> RestserverController : true
+deactivate RestserverService
+
+
+RestserverController -> DataAccess : HTTP 200 true
+deactivate DataAccess
+deactivate RestserverController
+
+
+
+
+DataAccess -> MainPageController 
+deactivate DataAccess
+
+
+
+deactivate MainPageController
+
+MainPageController -> User: updateFilmTableView()
+activate User
+User -> User : getFilmList()
+User -> MainPageController : FilmList
+deactivate User
+MainPageController -> MainPageController: clearTextField()
+MainPageController -> GUI
+deactivate MainPageController
+
+GUI -> user : Done
+
+@enduml

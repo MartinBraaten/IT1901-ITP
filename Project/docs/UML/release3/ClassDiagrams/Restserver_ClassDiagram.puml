@@ -1,0 +1,43 @@
+@startuml MovieRater Class Diagram
+
+/' Copy paste fra forrige innlevering '/
+title MovieRater Class Diagram
+
+/' - private
+    # protected
+    ~ package level access
+    + public
+ '/
+
+package "movierater.restserver"{
+    namespace movierater.restserver{
+        class movierater.restserver.RestServerApplication{
+            {static} + main()
+        }
+    }
+
+    namespace movierater.restserver{
+        class movierater.restserver.RestserverController{
+            - restserverService : RestserverService
+
+            + getUser(String user) : User
+            + postUser(User userClass, String user) : boolean
+            + deleteUser(String user) : boolean
+        }
+    }
+
+    namespace movierater.restserver{
+        class movierater.restserver.RestserverService{
+            - userPersistence : UserPersistence
+            - {static} pathString : String
+
+            + getUser(String userName) : User
+            + postUser(User user, String userName) : boolean
+            + deleteUser(String userName) : Boolean
+        }
+    }
+}
+
+movierater.restserver.RestserverController o-left movierater.restserver.RestserverService : RestserverService
+
+@enduml
